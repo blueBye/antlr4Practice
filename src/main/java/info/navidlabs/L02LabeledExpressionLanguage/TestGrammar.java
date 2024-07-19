@@ -19,4 +19,16 @@ public class TestGrammar {
 		ParseTree tree = parser.prog(); // parse; start at prog
 		System.out.println(tree.toStringTree(parser)); // print tree as text
 	}
+
+	public static void test02(String inputFile) throws Exception {
+		InputStream is = new FileInputStream(inputFile);
+		ANTLRInputStream input = new ANTLRInputStream(is);
+		LabeledExprLexer lexer = new LabeledExprLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		LabeledExprParser parser = new LabeledExprParser(tokens);
+		ParseTree tree = parser.prog(); // parse; start at prog
+
+		EvalVisitor eval = new EvalVisitor();
+		eval.visit(tree);
+	}
 }
