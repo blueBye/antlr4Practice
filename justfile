@@ -6,6 +6,9 @@ PROJECT_PACKAGE := "info.navidlabs"
 generate $base_path $project_package $grammar_package $grammar_name:
 	antlr4 {{base_path}}/{{grammar_package}}/{{grammar_name}}.g4 -package {{project_package}}.{{grammar_package}}.gen -o {{base_path}}/{{grammar_package}}/gen
 
+generate-visitor $base_path $project_package $grammar_package $grammar_name:
+	antlr4 -visitor {{base_path}}/{{grammar_package}}/{{grammar_name}}.g4 -package {{project_package}}.{{grammar_package}}.gen -o {{base_path}}/{{grammar_package}}/gen
+
 gen-L01:
 	set GRAMMAR_PACKAGE "L01ExpresionLanguage"; \
 	set GRAMMAR_NAME "Expr"; \
@@ -14,7 +17,7 @@ gen-L01:
 gen-L02:
 	set GRAMMAR_PACKAGE "L02LabeledExpressionLanguage"; \
 	set GRAMMAR_NAME "LabeledExpr"; \
-	just --justfile {{justfile()}} generate {{BASE_PATH}} {{PROJECT_PACKAGE}} $GRAMMAR_PACKAGE $GRAMMAR_NAME
+	just --justfile {{justfile()}} generate-visitor {{BASE_PATH}} {{PROJECT_PACKAGE}} $GRAMMAR_PACKAGE $GRAMMAR_NAME
 
 
 #build: generate
