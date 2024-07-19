@@ -11,6 +11,11 @@ gen-L01:
 	set GRAMMAR_NAME "Expr"; \
 	just --justfile {{justfile()}} generate {{BASE_PATH}} {{PROJECT_PACKAGE}} $GRAMMAR_PACKAGE $GRAMMAR_NAME
 
+gen-L02:
+	set GRAMMAR_PACKAGE "L02LabeledExpressionLanguage"; \
+	set GRAMMAR_NAME "LabeledExpr"; \
+	just --justfile {{justfile()}} generate {{BASE_PATH}} {{PROJECT_PACKAGE}} $GRAMMAR_PACKAGE $GRAMMAR_NAME
+
 
 #build: generate
 #    javac -d . ./gen/*.java
